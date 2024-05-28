@@ -2,18 +2,637 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/homeView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:foregroundTint="#FFFFFF"
+    tools:context=".activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvNavBar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="25dp"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="56dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gg_menu_left_alt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imLogo"
+        android:layout_width="121dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/im_viewlogo" />
+
+    <ImageView
+        android:id="@+id/imAvatar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="35dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="106dp"
+        app:layout_constraintBottom_toTopOf="@+id/bnv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imContent1"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/im_rectangle_4" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvTasks"
+                android:layout_width="wrap_content"
+                android:layout_height="62dp"
+
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="17dp"
+                android:clickable="true"
+
+                android:outlineAmbientShadowColor="@color/transparent"
+                android:outlineSpotShadowColor="@color/transparent"
+
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="12dp"
+                app:cardForegroundColor="@color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imContent1"
+                app:rippleColor="@color/transparent"
+                app:strokeColor="@color/light_gray"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clTasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imTasks"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_fluent_tasks_app_24_regular" />
+
+                    <TextView
+                        android:id="@+id/tNumTasks"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/blue_green"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imTasks"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tTasks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="Tasks"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tNumTasks"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imChevronRight1"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="-3dp"
+                        android:layout_marginEnd="-3dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tTasks"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.518"
+                        app:srcCompat="@drawable/ic_chevron_right_rounded" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvPatients"
+                android:layout_width="wrap_content"
+                android:layout_height="62dp"
+
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="35dp"
+                android:clickable="true"
+                android:outlineAmbientShadowColor="@color/transparent"
+                android:outlineSpotShadowColor="@color/transparent"
+
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="12dp"
+
+                app:cardForegroundColor="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/cvTasks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imContent1"
+                app:rippleColor="@color/transparent"
+                app:strokeColor="@color/light_gray"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clPatients"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imPatients"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_mdi_patient" />
+
+                    <TextView
+                        android:id="@+id/tNumPatients"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imPatients"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tPatients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="Patients"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tNumPatients"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imChevronRight2"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="-3dp"
+                        android:layout_marginEnd="-3dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tPatients"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_chevron_right_rounded" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tNextPatient"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="39dp"
+                android:gravity="bottom"
+                android:text="Next Patient"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvTasks" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSeeAll"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginEnd="35dp"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tNextPatient"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/tSeeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="See all"
+                    android:textColor="@color/blue_green"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imChevronRight3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tSeeAll"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_chevron_right_rounded_bluegreen" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvNextPatient"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginBottom="28dp"
+                android:outlineAmbientShadowColor="@color/transparent"
+                android:outlineSpotShadowColor="@color/transparent"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="12dp"
+
+                app:cardForegroundColor="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tNextPatient"
+                app:rippleColor="@color/transparent"
+                app:strokeColor="@color/light_gray"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clNextPatient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tNamePatient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="18dp"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tSexPatient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tNamePatient" />
+
+                    <TextView
+                        android:id="@+id/tAgePatient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="68dp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tSexPatient"
+                        app:layout_constraintStart_toEndOf="@+id/tSexPatient" />
+
+                    <TextView
+                        android:id="@+id/tAilments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="15dp"
+                        android:text="Ailments"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tSexPatient" />
+
+                    <TextView
+                        android:id="@+id/tRemediations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="65dp"
+                        android:text="Remediations"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tAilments" />
+
+                    <TextView
+                        android:id="@+id/tNextTask"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="59dp"
+                        android:text="Next Task"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tRemediations" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cvNextTask"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="6dp"
+                        android:clickable="true"
+                        android:outlineAmbientShadowColor="@color/transparent"
+
+                        android:outlineSpotShadowColor="@color/transparent"
+                        app:cardBackgroundColor="@color/transparent"
+
+                        app:cardCornerRadius="9dp"
+                        app:cardForegroundColor="@color/transparent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tNextTask"
+                        app:rippleColor="@color/transparent"
+                        app:strokeColor="@color/light_gray"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tClickToNextTask"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="17dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginEnd="17dp"
+                                android:layout_marginBottom="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cvViewProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="71dp"
+                        android:layout_marginBottom="18dp"
+                        android:clickable="true"
+                        android:outlineAmbientShadowColor="@color/transparent"
+                        android:outlineSpotShadowColor="@color/transparent"
+
+                        app:cardBackgroundColor="@color/transparent"
+                        app:cardCornerRadius="6dp"
+
+                        app:cardForegroundColor="@color/transparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tNextTask"
+                        app:rippleColor="@color/transparent"
+                        app:strokeColor="@color/blue_green"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clViewProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:outlineSpotShadowColor="#10B9AA">
+
+                            <ImageView
+                                android:id="@+id/imViewProfile"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_bluegreen_eye" />
+
+                            <TextView
+                                android:id="@+id/tViewProfile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="10dp"
+                                android:text="View Profile"
+                                android:textColor="@color/blue_green"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/imViewProfile"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@+id/imViewProfile"
+                                app:layout_constraintTop_toTopOf="@+id/imViewProfile" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cvViewLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginEnd="18dp"
+                        android:clickable="true"
+                        android:outlineAmbientShadowColor="@color/transparent"
+                        android:outlineSpotShadowColor="@color/transparent"
+
+                        app:cardBackgroundColor="@color/transparent"
+                        app:cardCornerRadius="6dp"
+
+                        app:cardForegroundColor="@color/transparent"
+                        app:layout_constraintBottom_toBottomOf="@+id/cvViewProfile"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/cvViewProfile"
+                        app:rippleColor="@color/transparent"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clViewLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imViewLocation"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_add_location" />
+
+                            <TextView
+                                android:id="@+id/tViewLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="10dp"
+                                android:text="View Location"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/imViewLocation"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/imViewLocation"
+                                app:layout_constraintTop_toTopOf="@+id/imViewLocation" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvAilmentList"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="61dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tAilments" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clAilmentSizeList"
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/background_size_of_list_circle"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/rcvAilmentList"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rcvAilmentList"
+                        app:layout_constraintTop_toTopOf="@+id/rcvAilmentList">
+
+                        <TextView
+                            android:id="@+id/tAilmentSizeList"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textFontWeight="500"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.44"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.42000002" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvRemediationList"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="61dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tRemediations" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clRemediationSizeList"
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/background_size_of_list_circle"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/rcvRemediationList"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rcvRemediationList"
+                        app:layout_constraintTop_toTopOf="@+id/rcvRemediationList">
+
+                        <TextView
+                            android:id="@+id/tRemediationsSizeList"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textFontWeight="500"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.44"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.42000002" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <ImageButton
+        android:id="@+id/ib_sos"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_shape_circle"
+        android:clickable="true"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/ic_sos_alert" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
