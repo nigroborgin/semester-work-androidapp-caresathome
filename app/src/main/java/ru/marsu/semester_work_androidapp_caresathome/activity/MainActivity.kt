@@ -1,8 +1,11 @@
 package ru.marsu.semester_work_androidapp_caresathome.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.adapter.AilmentAdapter
 import ru.marsu.semester_work_androidapp_caresathome.adapter.RemediationAdapter
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityMainBinding
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             rcvRemediationList.adapter = remediationAdapter
 
             // TODO: тестовая часть. Удалить
+            imAvatar.setImageResource(R.drawable.im_avatar)
             tNumTasks.text = "20"
             tNumPatients.text = "10"
             tNamePatient.text = "Arvind Malhotra"
@@ -50,4 +54,25 @@ class MainActivity : AppCompatActivity() {
             tClickToNextTask.text = "Fill up Form Number 51"
         }
     }
+
+    fun onClickGoMyTasks(view : View) {
+        val intent = Intent(this, MyTasksActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onClickGoMyPatients(view : View) {
+        val intent = Intent(this, MyPatientsActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onClickGoPatientProfile(view : View) {
+        val intent = Intent(this, PatientProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onClickGoMyProfile(view : View) {
+        val intent = Intent(this, MyProfileActivity::class.java)
+        startActivity(intent)
+    }
+
 }
