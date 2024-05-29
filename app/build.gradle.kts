@@ -45,6 +45,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
     implementation("androidx.fragment:fragment-ktx:1.7.1")
+    implementation("androidx.cardview:cardview:1.0.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
