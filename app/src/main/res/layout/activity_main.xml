@@ -3,39 +3,11 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayout"
+    android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foregroundTint="#FFFFFF"
     tools:context=".activity.MainActivity">
-
-    <LinearLayout
-        android:id="@+id/llDrawer"
-        android:layout_width="334dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clMain"
@@ -95,7 +67,7 @@
                 app:srcCompat="@drawable/im_viewlogo" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvAvatar"
+                android:id="@+id/mcvAvatar"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
 
@@ -113,8 +85,7 @@
                 app:layout_constraintTop_toTopOf="parent"
 
                 app:rippleColor="@color/transparent"
-                app:strokeColor="@color/transparent"
-                tools:visibility="gone">
+                app:strokeColor="@color/transparent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clAvatar"
@@ -154,8 +125,7 @@
 
                 app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="@color/transparent"
-                app:strokeColor="@color/light_gray"
-                tools:visibility="visible">
+                app:strokeColor="@color/light_gray">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clCart"
@@ -316,6 +286,621 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_sos_alert" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDrawer"
+        android:layout_width="334dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/svDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clScrollDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/imClose"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginEnd="27dp"
+                    android:clickable="true"
+                    android:onClick="onClickCloseDrawer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_cross" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clDrawerUserData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="64dp"
+                    android:clickable="true"
+                    android:onClick="onClickGoMyProfile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mcvDrawerAvatar"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+
+                        android:clickable="true"
+                        android:onClick="onClickGoMyProfile"
+
+                        android:outlineAmbientShadowColor="@color/transparent"
+                        android:outlineSpotShadowColor="@color/transparent"
+                        app:cardBackgroundColor="@color/transparent"
+                        app:cardCornerRadius="56dp"
+                        app:cardForegroundColor="@color/transparent"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:rippleColor="@color/transparent"
+                        app:strokeColor="@color/transparent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clDrawerAvatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imDrawerAvatar"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/im_avatar_default"
+                                tools:srcCompat="@tools:sample/avatars" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clUserDataTexts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/mcvDrawerAvatar"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tDrawerUsername"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:text="Raghvendra Sinha"
+                            android:textColor="@color/black"
+                            android:textFontWeight="600"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tDrawerJobPost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:text="Medical Attendant"
+                            android:textColor="@color/gray"
+                            android:textFontWeight="400"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tDrawerUsername"
+                            app:layout_constraintTop_toBottomOf="@+id/tDrawerUsername" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvDrawerMyEarnings"
+                    android:layout_width="263dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="39dp"
+
+                    android:clickable="true"
+
+                    android:onClick="onClickGoMyProfile"
+                    android:outlineAmbientShadowColor="@color/transparent"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardCornerRadius="12dp"
+                    app:cardForegroundColor="@color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clDrawerUserData"
+                    app:rippleColor="@color/transparent"
+                    app:strokeColor="@color/transparent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clDrawerMyEarnings"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/mcvDrawerMyEarningsImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+
+                            android:layout_marginStart="20dp"
+
+                            android:layout_marginTop="13dp"
+                            android:layout_marginBottom="12dp"
+                            android:outlineAmbientShadowColor="@color/transparent"
+                            android:outlineSpotShadowColor="@color/transparent"
+
+                            android:visibility="visible"
+                            app:cardBackgroundColor="@color/gray_drawer"
+                            app:cardCornerRadius="56dp"
+                            app:cardForegroundColor="@color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rippleColor="@color/transparent"
+                            app:strokeColor="@color/transparent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/clDrawerMyEarningsImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imDrawerMyEarningsImage"
+                                    android:layout_width="26dp"
+                                    android:layout_height="24dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_earnings" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tMyEarnings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:fontFamily="@font/quicksand"
+                            android:text="My Earnings"
+                            android:textColor="@color/gray_drawer_text"
+                            android:textFontWeight="500"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/mcvDrawerMyEarningsImage"
+                            app:layout_constraintStart_toEndOf="@+id/mcvDrawerMyEarningsImage"
+                            app:layout_constraintTop_toTopOf="@+id/mcvDrawerMyEarningsImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvDrawerBilling"
+                    android:layout_width="263dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:onClick="onClickGoMyProfile"
+                    android:outlineAmbientShadowColor="@color/transparent"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardCornerRadius="12dp"
+                    app:cardForegroundColor="@color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvDrawerMyEarnings"
+                    app:rippleColor="@color/transparent"
+                    app:strokeColor="@color/transparent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clDrawerBilling"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/mcvDrawerBillingImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+
+                            android:layout_marginStart="20dp"
+
+                            android:layout_marginTop="13dp"
+                            android:layout_marginBottom="12dp"
+                            android:clickable="false"
+                            android:outlineAmbientShadowColor="@color/transparent"
+                            android:outlineSpotShadowColor="@color/transparent"
+
+                            android:visibility="visible"
+                            app:cardBackgroundColor="@color/gray_drawer"
+                            app:cardCornerRadius="56dp"
+                            app:cardForegroundColor="@color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rippleColor="@color/transparent"
+                            app:strokeColor="@color/transparent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/clDrawerBillingImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imDrawerBillingImage"
+                                    android:layout_width="26dp"
+                                    android:layout_height="24dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_billing" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tBilling"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:fontFamily="@font/quicksand"
+                            android:text="Billing"
+                            android:textColor="@color/gray_drawer_text"
+                            android:textFontWeight="500"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/mcvDrawerBillingImage"
+                            app:layout_constraintStart_toEndOf="@+id/mcvDrawerBillingImage"
+                            app:layout_constraintTop_toTopOf="@+id/mcvDrawerBillingImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvDrawerMyInventory"
+                    android:layout_width="263dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="20dp"
+
+                    android:clickable="true"
+
+                    android:onClick="onClickGoInventory"
+                    android:outlineAmbientShadowColor="@color/transparent"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardCornerRadius="12dp"
+                    app:cardForegroundColor="@color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvDrawerBilling"
+                    app:rippleColor="@color/transparent"
+                    app:strokeColor="@color/transparent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clDrawerMyInventory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/mcvDrawerMyInventoryImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+
+                            android:layout_marginStart="20dp"
+
+                            android:layout_marginTop="13dp"
+                            android:layout_marginBottom="12dp"
+                            android:clickable="false"
+                            android:outlineAmbientShadowColor="@color/transparent"
+                            android:outlineSpotShadowColor="@color/transparent"
+
+                            android:visibility="visible"
+                            app:cardBackgroundColor="@color/gray_drawer"
+                            app:cardCornerRadius="56dp"
+                            app:cardForegroundColor="@color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rippleColor="@color/transparent"
+                            app:strokeColor="@color/transparent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/clDrawerMyInventoryImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imDrawerMyInventoryImage"
+                                    android:layout_width="26dp"
+                                    android:layout_height="24dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_inventory_for_drawer" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tMyInventory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:fontFamily="@font/quicksand"
+                            android:text="My Inventory"
+                            android:textColor="@color/gray_drawer_text"
+                            android:textFontWeight="500"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/mcvDrawerMyInventoryImage"
+                            app:layout_constraintStart_toEndOf="@+id/mcvDrawerMyInventoryImage"
+                            app:layout_constraintTop_toTopOf="@+id/mcvDrawerMyInventoryImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvDrawerHistory"
+                    android:layout_width="263dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="20dp"
+
+                    android:clickable="true"
+
+                    android:onClick="onClickGoTasksHistory"
+                    android:outlineAmbientShadowColor="@color/transparent"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardCornerRadius="12dp"
+                    app:cardForegroundColor="@color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvDrawerMyInventory"
+                    app:rippleColor="@color/transparent"
+                    app:strokeColor="@color/transparent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clDrawerHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/mcvDrawerHistoryImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+
+                            android:layout_marginStart="20dp"
+
+                            android:layout_marginTop="13dp"
+                            android:layout_marginBottom="12dp"
+                            android:outlineAmbientShadowColor="@color/transparent"
+                            android:outlineSpotShadowColor="@color/transparent"
+
+                            android:visibility="visible"
+                            app:cardBackgroundColor="@color/gray_drawer"
+                            app:cardCornerRadius="56dp"
+                            app:cardForegroundColor="@color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rippleColor="@color/transparent"
+                            app:strokeColor="@color/transparent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/clDrawerHistoryImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imDrawerHistoryImage"
+                                    android:layout_width="26dp"
+                                    android:layout_height="24dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_history" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tHistory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:fontFamily="@font/quicksand"
+                            android:text="History"
+                            android:textColor="@color/gray_drawer_text"
+                            android:textFontWeight="500"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/mcvDrawerHistoryImage"
+                            app:layout_constraintStart_toEndOf="@+id/mcvDrawerHistoryImage"
+                            app:layout_constraintTop_toTopOf="@+id/mcvDrawerHistoryImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvDrawerMyRatings"
+                    android:layout_width="263dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="20dp"
+
+                    android:outlineAmbientShadowColor="@color/transparent"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardCornerRadius="12dp"
+                    app:cardForegroundColor="@color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvDrawerHistory"
+                    app:rippleColor="@color/transparent"
+                    app:strokeColor="@color/transparent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clDrawerMyRatings"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/mcvDrawerMyRatingsImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+
+                            android:layout_marginStart="20dp"
+
+                            android:layout_marginTop="13dp"
+                            android:layout_marginBottom="12dp"
+                            android:outlineAmbientShadowColor="@color/transparent"
+                            android:outlineSpotShadowColor="@color/transparent"
+
+                            android:visibility="visible"
+                            app:cardBackgroundColor="@color/gray_drawer"
+                            app:cardCornerRadius="56dp"
+                            app:cardForegroundColor="@color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rippleColor="@color/transparent"
+                            app:strokeColor="@color/transparent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/clDrawerMyRatingsImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imDrawerMyRatingsImage"
+                                    android:layout_width="26dp"
+                                    android:layout_height="24dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_rating" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tMyRatings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:fontFamily="@font/quicksand"
+                            android:text="My Ratings"
+                            android:textColor="@color/gray_drawer_text"
+                            android:textFontWeight="500"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/mcvDrawerMyRatingsImage"
+                            app:layout_constraintStart_toEndOf="@+id/mcvDrawerMyRatingsImage"
+                            app:layout_constraintTop_toTopOf="@+id/mcvDrawerMyRatingsImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvDrawerLogOut"
+                    android:layout_width="263dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="69dp"
+
+                    android:outlineAmbientShadowColor="@color/transparent"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardCornerRadius="12dp"
+                    app:cardForegroundColor="@color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvDrawerMyRatings"
+                    app:rippleColor="@color/transparent"
+                    app:strokeColor="@color/transparent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clDrawerLogOut"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/mcvDrawerLogOutImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+
+                            android:layout_marginStart="20dp"
+
+                            android:layout_marginTop="13dp"
+                            android:layout_marginBottom="12dp"
+                            android:outlineAmbientShadowColor="@color/transparent"
+                            android:outlineSpotShadowColor="@color/transparent"
+
+                            android:visibility="visible"
+                            app:cardBackgroundColor="@color/light_red"
+                            app:cardCornerRadius="56dp"
+                            app:cardForegroundColor="@color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rippleColor="@color/transparent"
+                            app:strokeColor="@color/transparent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/clDrawerLogOutImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imDrawerLogOutImage"
+                                    android:layout_width="26dp"
+                                    android:layout_height="24dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_log_out" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tLogOut"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:fontFamily="@font/quicksand"
+                            android:text="Log Out"
+                            android:textColor="@color/gray_drawer_text"
+                            android:textFontWeight="500"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/mcvDrawerLogOutImage"
+                            app:layout_constraintStart_toEndOf="@+id/mcvDrawerLogOutImage"
+                            app:layout_constraintTop_toTopOf="@+id/mcvDrawerLogOutImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

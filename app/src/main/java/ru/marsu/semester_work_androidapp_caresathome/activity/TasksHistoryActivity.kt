@@ -2,15 +2,15 @@ package ru.marsu.semester_work_androidapp_caresathome.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityMyCartBinding
+import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityTasksHistoryBinding
 
-class MyCartActivity : AppCompatActivity() {
+class TasksHistoryActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMyCartBinding
+    lateinit var binding: ActivityTasksHistoryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMyCartBinding.inflate(layoutInflater)
+        binding = ActivityTasksHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 

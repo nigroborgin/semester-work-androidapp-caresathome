@@ -52,12 +52,12 @@ class MainActivity : AppCompatActivity() {
         homeText = binding.tHome
         inventoryText = binding.tInventory
 
-        homeRightTopElem = binding.cvAvatar
+        homeRightTopElem = binding.mcvAvatar
         inventoryRightTopElem= binding.cvCart
 
         // TODO: тестовая часть. Удалить
         binding.imAvatar.setImageResource(R.drawable.im_avatar)
-
+        binding.imDrawerAvatar.setImageResource(R.drawable.im_avatar)
     }
 
     fun onClickGoMyTasks(view: View) {
@@ -80,8 +80,24 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onClickGoTasksHistory(view: View) {
+        val intent = Intent(this, TasksHistoryActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onClickGoMyCart(view: View) {
+        val intent = Intent(this, MyCartActivity::class.java)
+        startActivity(intent)
+    }
+
+
+
     fun onClickOpenDrawer(view: View) {
-        binding.drawerLayout.openDrawer(GravityCompat.START)
+        binding.drawer.openDrawer(GravityCompat.START)
+    }
+
+    fun onClickCloseDrawer(view: View) {
+        binding.drawer.closeDrawer(GravityCompat.START)
     }
 
     fun onClickOpenHomeFrame(view: View) {
@@ -92,17 +108,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun onClickGoInventory(view: View) {
+        openInventoryFrame()
+        binding.drawer.closeDrawer(GravityCompat.START)
+    }
+
     fun onClickOpenInventoryFrame(view: View) {
+        openInventoryFrame()
+    }
+
+    fun openInventoryFrame() {
         if (selectedFrame != FragmentsOfMainActivity.INVENTORY) {
             unselectHomeTab()
             selectInventoryTab()
             selectedFrame = FragmentsOfMainActivity.INVENTORY
         }
-    }
-
-    fun onClickGoMyCart(view: View) {
-        val intent = Intent(this, MyCartActivity::class.java)
-        startActivity(intent)
     }
 
     fun selectInventoryTab() {
