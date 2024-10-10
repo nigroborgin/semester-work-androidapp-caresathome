@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ru.marsu.semester-work-androidapp-caresathome"
+rootProject.name = "semester_work_androidapp_caresathome"
 include(":app")
+ 
