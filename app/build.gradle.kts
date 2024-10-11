@@ -50,8 +50,9 @@ dependencies {
     implementation(libs.androidx.cardview)
 
     // DB dependency
+
+    implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
 
     // Default dependency
