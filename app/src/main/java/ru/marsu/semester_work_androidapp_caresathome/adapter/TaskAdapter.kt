@@ -7,24 +7,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.databinding.TaskItemForLabBinding
-import ru.marsu.semester_work_androidapp_caresathome.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
 import java.time.format.DateTimeFormatter
 
 class TaskAdapter(private val listener: TaskListener, val context: Context) : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
 
-    val taskList = ArrayList<Task>()
+    val taskDtoList = ArrayList<TaskDto>()
 
     class TaskHolder(item: View) : RecyclerView.ViewHolder(item) {
         // TODO: в курсовой заменить на нормальный TaskItem
         val binding = TaskItemForLabBinding.bind(item)
 
-        fun bind(task: Task, listener: TaskListener, context: Context) = with(binding) {
-            tvTitle.text = task.title
-            tvDueDate.text = task.dueDateTime.toString()
-            tvPeriodicity.text = task.periodicity?.period
+        fun bind(taskDto: TaskDto, listener: TaskListener, context: Context) = with(binding) {
+            tvTitle.text = taskDto.title
+            tvDueDate.text = taskDto.dueDateTime.toString()
+            tvPeriodicity.text = taskDto.periodicity?.period
 
             // Period: 1-"Everyday", 2-"Alternate Day", 3-"Third Day", 4-"Weekly", 5-"Monthly"
-            when (task.periodicity?.id) {
+            when (taskDto.periodicity?.id) {
                 1 -> {
                     clPeriodicity.setBackgroundResource(R.drawable.background_periodicity_blue_green)
                     tvPeriodicity.setTextColor(context.getColor(R.color.blue_green3))
@@ -48,13 +48,13 @@ class TaskAdapter(private val listener: TaskListener, val context: Context) : Re
             }
 
             // Status: 1-"completed", 2-"pending", 3-"missed"
-            when (task.status?.id) {
+            when (taskDto.status?.id) {
                 1 -> {
                     clDueDate.setBackgroundResource(R.drawable.background_due_date_light_blue_green)
                     tvDueDate.setTextColor(context.getColor(R.color.blue_green3))
                     tvDueDate.text = StringBuilder()
                         .append("Completed on ")
-                        .append(task.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm")))
+                        .append(taskDto.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm")))
                         .toString()
                     icWatch.setImageResource(R.drawable.ic_watch_blue_green)
                 }
@@ -63,7 +63,7 @@ class TaskAdapter(private val listener: TaskListener, val context: Context) : Re
                     tvDueDate.setTextColor(context.getColor(R.color.red2))
                     tvDueDate.text = StringBuilder()
                         .append("Due by - ")
-                        .append(task.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm")))
+                        .append(taskDto.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm")))
                         .toString()
                     icWatch.setImageResource(R.drawable.ic_watch_red)
                 }
@@ -72,13 +72,13 @@ class TaskAdapter(private val listener: TaskListener, val context: Context) : Re
                     tvDueDate.setTextColor(context.getColor(R.color.red4))
                     tvDueDate.text = StringBuilder()
                         .append("Missed on ")
-                        .append(task.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm")))
+                        .append(taskDto.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm")))
                         .toString()
                     icWatch.setImageResource(R.drawable.ic_watch_red2)
                 }
             }
 
-            tvPatientName.text = task.patient
+            tvPatientName.text = taskDto.patient
             // TODO: в курсовой убрать
             cvViewPatientLocation.setOnClickListener {
                 listener.onClickDeleteTask(adapterPosition)
@@ -99,21 +99,21 @@ class TaskAdapter(private val listener: TaskListener, val context: Context) : Re
     }
 
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
-        holder.bind(taskList[position], listener, context)
+        holder.bind(taskDtoList[position], listener, context)
     }
 
     override fun getItemCount(): Int {
-        return taskList.size
+        return taskDtoList.size
     }
 
-    fun add(task: Task) {
-        taskList.add(task)
+    fun add(taskDto: TaskDto) {
+        taskDtoList.add(taskDto)
         notifyDataSetChanged()
     }
 
-    fun add(list: List<Task>) {
-        taskList.clear()
-        taskList.addAll(list)
+    fun add(list: List<TaskDto>) {
+        taskDtoList.clear()
+        taskDtoList.addAll(list)
         notifyDataSetChanged()
     }
 

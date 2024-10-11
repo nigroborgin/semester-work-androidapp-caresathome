@@ -17,7 +17,7 @@ import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.ServiceLocation
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityMyTasksBinding
 import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
-import ru.marsu.semester_work_androidapp_caresathome.entity.Status
+import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
 import ru.marsu.semester_work_androidapp_caresathome.fragment.CompletedTasksFragment
 import ru.marsu.semester_work_androidapp_caresathome.fragment.FragmentsOfTasksActivity
 import ru.marsu.semester_work_androidapp_caresathome.fragment.PendingTasksFragment
@@ -57,8 +57,8 @@ class MyTasksActivity : AppCompatActivity() {
         sl.init(this)
         taskRepository = sl.services["taskRepository"] as TaskRepository
         // Status: 1-"completed", 2-"pending", 3-"missed"
-        completedCountText.text = String.format(taskRepository.getAllByStatus(Status(1)).size.toString())
-        pendingCountText.text = String.format(taskRepository.getAllByStatus(Status(2)).size.toString())
+        completedCountText.text = String.format(taskRepository.getByStatus(StatusDto(1)).size.toString())
+        pendingCountText.text = String.format(taskRepository.getByStatus(StatusDto(2)).size.toString())
 
         selectPendingTab()
 

@@ -16,9 +16,9 @@ import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.ServiceLocation
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityCreateTaskBinding
 import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
-import ru.marsu.semester_work_androidapp_caresathome.entity.Periodicity
-import ru.marsu.semester_work_androidapp_caresathome.entity.Status
-import ru.marsu.semester_work_androidapp_caresathome.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.dto.PeriodicityDto
+import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
+import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -113,27 +113,27 @@ class CreateTaskActivity : AppCompatActivity(),
     }
 
     fun onClickCreateTask(view: View) {
-        val task = Task()
+        val taskDto = TaskDto()
 
-        task.title = checkAndReturnString(binding.inTitle.text.toString())
-        task.patient = checkAndReturnString(binding.inPatientName.text.toString())
-        task.periodicity = Periodicity(periodicityPosition+1)
-        task.bloodPressure = checkAndReturnString(binding.inBloodPressure1.text.toString())
+        taskDto.title = checkAndReturnString(binding.inTitle.text.toString())
+        taskDto.patient = checkAndReturnString(binding.inPatientName.text.toString())
+        taskDto.periodicity = PeriodicityDto(periodicityPosition+1)
+        taskDto.bloodPressure = checkAndReturnString(binding.inBloodPressure1.text.toString())
 
         if (checkAndReturnString(binding.inHeartRate1.text.toString()).isDigitsOnly()) {
-            task.heartRate = binding.inHeartRate1.text.toString().toInt()
+            taskDto.heartRate = binding.inHeartRate1.text.toString().toInt()
         }
 
         val localDateTime = LocalDateTime.of(dueOnDate, dueOnTime)
-        task.dueDateTime = localDateTime
+        taskDto.dueDateTime = localDateTime
         // Status: 1-"completed", 2-"pending", 3-"missed"
-        task.status = if (localDateTime.isAfter(LocalDateTime.now())) Status(2) else Status(3)
+        taskDto.status = if (localDateTime.isAfter(LocalDateTime.now())) StatusDto(2) else StatusDto(3)
         if (isCompleted) {
-            task.status = Status(1)
-            task.timeWitchCompleted = timeWitchCompleted
+            taskDto.status = StatusDto(1)
+            taskDto.timeWitchCompleted = timeWitchCompleted
         }
-        task.isBloodSampleCollection = isBloodCollected
-        val idInserted = taskRepository.create(task).toInt()
+        taskDto.isBloodSampleCollection = isBloodCollected
+        val idInserted = taskRepository.create(taskDto).toInt()
 
         val intent = Intent()
         intent.putExtra("taskIdInserted", idInserted)

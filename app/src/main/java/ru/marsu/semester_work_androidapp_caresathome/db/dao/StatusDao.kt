@@ -1,51 +1,16 @@
 package ru.marsu.semester_work_androidapp_caresathome.db.dao
 
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
-import android.util.Log
-import ru.marsu.semester_work_androidapp_caresathome.db.DbScheme
-import ru.marsu.semester_work_androidapp_caresathome.entity.Status
+import androidx.room.Dao
+import androidx.room.Query
+import ru.marsu.semester_work_androidapp_caresathome.db.entity.Status
 
-class StatusDao(
-    private val db: SQLiteDatabase) {
+@Dao
+interface StatusDao {
 
-    val TAG = "MY_DEBUG"
+    @Query("SELECT * FROM status as s WHERE s.id = :id")
+    fun getOneById(id: Int): Status
 
-    fun getOneById(id: Int): Status {
+    @Query("SELECT * FROM status")
+    fun getAll(): List<Status>
 
-        val cursor = db.query(
-            DbScheme.Status.TABLE_NAME,
-            null,
-            "${BaseColumns._ID} = $id",
-            null,
-            null,
-            null,
-            null
-        )
-
-        lateinit var status: Status
-        if (cursor.moveToFirst()) {
-            status = makeEntity(cursor)
-            cursor.close()
-        }
-
-        Log.d(TAG, status.toString())
-        return status
-    }
-
-    private fun makeEntity(cursor: Cursor): Status {
-
-        val id = cursor.getInt(cursor.getColumnIndexOrThrow(
-            BaseColumns._ID))
-        val title = cursor.getString(cursor.getColumnIndexOrThrow(
-            DbScheme.Status.COLUMN_NAME_TITLE))
-
-        val status = Status(
-            id,
-            title
-        )
-
-        return status
-    }
 }

@@ -1,79 +1,112 @@
 package ru.marsu.semester_work_androidapp_caresathome.db.repository
 
-import android.util.Log
+
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import ru.marsu.semester_work_androidapp_caresathome.db.converter.PeriodicityConverter
+import ru.marsu.semester_work_androidapp_caresathome.db.converter.StatusConverter
+import ru.marsu.semester_work_androidapp_caresathome.db.converter.TaskConverter
 import ru.marsu.semester_work_androidapp_caresathome.db.dao.PeriodicityDao
 import ru.marsu.semester_work_androidapp_caresathome.db.dao.StatusDao
 import ru.marsu.semester_work_androidapp_caresathome.db.dao.TaskDao
-import ru.marsu.semester_work_androidapp_caresathome.entity.Status
-import ru.marsu.semester_work_androidapp_caresathome.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.db.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
+import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
+import java.util.ArrayList
 
-class TaskRepository(taskDao: TaskDao, statusDao: StatusDao, periodicityDao: PeriodicityDao) {
+class TaskRepository(
+    private val taskDao: TaskDao,
+    private val statusDao: StatusDao,
+    private val periodicityDao: PeriodicityDao) {
 
-    private val taskDao = taskDao
-    private val statusDao = statusDao
-    private val periodicityDao = periodicityDao
+    /**
+     * @return `id` of created `Task`
+     */
+    fun create(taskDto: TaskDto): Long = runBlocking {
+        val idCreated = async {
+            return@async taskDao.insert(TaskConverter.instance.convert(taskDto))
+        }.await()
 
-    private val TAG = "MY_DEBUG"
-
-    fun create(task : Task): Long {
-        val idInserted = taskDao.insert(task)
-        return idInserted
+        return@runBlocking idCreated
     }
 
-    fun getOneById(id : Int) : Task {
-        val task = taskDao.getOneById(id)
-        Log.d(TAG, "TaskRepository.getOneById:\n$task")
-        val status = task.status?.let { statusDao.getOneById(it.id) }
-        Log.d(TAG, "TaskRepository.getOneById:\n$status")
-        val periodicity = task.periodicity?.let { periodicityDao.getOneById(it.id) }
-        Log.d(TAG, "TaskRepository.getOneById:\n$periodicity")
+    fun getOneById(id: Int): TaskDto = runBlocking {
+        val taskModel = async {
+            val taskDto: TaskDto = TaskConverter.instance.convert(
+                taskDao.getOneById(id)
+            )
+            taskDto.status = StatusConverter.instance.convert(
+                statusDao.getOneById(taskDto.status?.id!!)
+            )
+            taskDto.periodicity = PeriodicityConverter.instance.convert(
+                periodicityDao.getOneById(taskDto.periodicity?.id!!)
+            )
+            return@async taskDto
+        }.await()
 
-        task.status = status
-        task.periodicity = periodicity
-
-        return task
+        return@runBlocking taskModel
     }
 
-    fun getAll(): List<Task> {
+    fun getAll(): List<TaskDto> = runBlocking {
+        val taskModelList = async {
+            val taskList: List<Task> = taskDao.getAll()
+            val taskDtoList = ArrayList<TaskDto>(taskList.size)
+            for (task: Task in taskList) {
+                val taskModel = TaskConverter.instance.convert(task)
+                taskModel.status = StatusConverter.instance.convert(
+                    statusDao.getOneById(task.statusId!!)
+                )
+                taskModel.periodicity = PeriodicityConverter.instance.convert(
+                    periodicityDao.getOneById(task.periodicityId!!)
+                )
+                taskDtoList.add(taskModel)
+            }
+            return@async taskDtoList
+        }.await()
 
-        val taskList = taskDao.getAll()
-
-        for (task in taskList) {
-            val status = task.status?.let { statusDao.getOneById(it.id) }
-            val periodicity = task.periodicity?.let { periodicityDao.getOneById(it.id) }
-
-            task.status = status
-            task.periodicity = periodicity
-        }
-
-        return taskList
+        return@runBlocking taskModelList
     }
 
-    fun getAllByStatus(status: Status): List<Task> {
-        val taskList = taskDao.getAllByStatus(status.id)
+    fun getByStatus(statusDto: StatusDto): List<TaskDto> = runBlocking {
+        val taskModelList = async {
+            val taskList: List<Task> = taskDao.getByStatus(statusDto.id!!)
+            val taskDtoList = ArrayList<TaskDto>(taskList.size)
+            for (task: Task in taskList) {
+                val taskModel = TaskConverter.instance.convert(task)
+                taskModel.status = StatusConverter.instance.convert(
+                    statusDao.getOneById(task.statusId!!)
+                )
+                taskModel.periodicity = PeriodicityConverter.instance.convert(
+                    periodicityDao.getOneById(task.periodicityId!!)
+                )
+                taskDtoList.add(taskModel)
+            }
+            return@async taskDtoList
+        }.await()
 
-        for (task in taskList) {
-            val status = task.status?.let { statusDao.getOneById(it.id) }
-            val periodicity = task.periodicity?.let { periodicityDao.getOneById(it.id) }
-
-            task.status = status
-            task.periodicity = periodicity
-        }
-
-        return taskList
-
+        return@runBlocking taskModelList
     }
 
-    fun update(task : Task) : Int {
-        return taskDao.update(task)
+    /**
+     * @return `count` of updated `Task`
+     */
+    fun update(taskDto: TaskDto): Int = runBlocking {
+        val countUpdated = async {
+            return@async taskDao.update(TaskConverter.instance.convert(taskDto))
+        }.await()
+
+        return@runBlocking countUpdated
     }
 
-    fun delete(task : Task) {
-        task.id?.let { delete(it) }
-    }
+    /**
+     * @return `count` of deleted `Task`
+     */
+    fun delete(taskDto: TaskDto): Int = runBlocking {
+        val countDeleted = async {
+            return@async taskDao.delete(TaskConverter.instance.convert(taskDto))
+        }.await()
 
-    fun delete(id : Int) {
-        taskDao.delete(id)
+        return@runBlocking countDeleted
     }
 
 }

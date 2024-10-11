@@ -17,9 +17,9 @@ import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.ServiceLocation
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityEditTaskBinding
 import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
-import ru.marsu.semester_work_androidapp_caresathome.entity.Periodicity
-import ru.marsu.semester_work_androidapp_caresathome.entity.Status
-import ru.marsu.semester_work_androidapp_caresathome.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.dto.PeriodicityDto
+import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
+import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -51,34 +51,34 @@ class EditTaskActivity : AppCompatActivity(),
         binding = ActivityEditTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
         intent = this.getIntent()
-        val task = intent.getSerializableExtra("task", Task::class.java)
-        if (task != null) {
-            init(task)
+        val taskDto = intent.getSerializableExtra("task", TaskDto::class.java)
+        if (taskDto != null) {
+            init(taskDto)
         }
     }
 
-    private fun init(task: Task) {
+    private fun init(taskDto: TaskDto) {
         binding.apply {
-            lastTaskId = task.id!!
-            inTitle.text = Editable.Factory.getInstance().newEditable(task.title)
+            lastTaskId = taskDto.id!!
+            inTitle.text = Editable.Factory.getInstance().newEditable(taskDto.title)
 
-            tvInputTime.text = task.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm"))
-            dueOnTime = task.dueDateTime!!.toLocalTime()
+            tvInputTime.text = taskDto.dueDateTime?.format(DateTimeFormatter.ofPattern("HH:mm"))
+            dueOnTime = taskDto.dueDateTime!!.toLocalTime()
             timePickerDialog = TimePickerDialog(
                 this@EditTaskActivity,
                 this@EditTaskActivity,
-                task.dueDateTime?.hour!!,
-                task.dueDateTime?.minute!!,
+                taskDto.dueDateTime?.hour!!,
+                taskDto.dueDateTime?.minute!!,
                 true)
 
-            tvInputDate.text = task.dueDateTime?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-            dueOnDate = task.dueDateTime!!.toLocalDate()
+            tvInputDate.text = taskDto.dueDateTime?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            dueOnDate = taskDto.dueDateTime!!.toLocalDate()
             datePickerDialog = DatePickerDialog(
                 this@EditTaskActivity,
                 this@EditTaskActivity,
-                task.dueDateTime?.year!!,
-                task.dueDateTime?.monthValue!!,
-                task.dueDateTime?.dayOfMonth!!)
+                taskDto.dueDateTime?.year!!,
+                taskDto.dueDateTime?.monthValue!!,
+                taskDto.dueDateTime?.dayOfMonth!!)
 
             sPeriodicity.adapter = ArrayAdapter.createFromResource(
                 this@EditTaskActivity,
@@ -86,22 +86,22 @@ class EditTaskActivity : AppCompatActivity(),
                 android.R.layout.simple_spinner_item
             ).also { sp -> sp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
             sPeriodicity.onItemSelectedListener = this@EditTaskActivity
-            sPeriodicity.setSelection(task.periodicity?.id!! - 1)
-            periodicityPosition = task.periodicity?.id!! - 1
+            sPeriodicity.setSelection(taskDto.periodicity?.id!! - 1)
+            periodicityPosition = taskDto.periodicity?.id!! - 1
 
             // Status: 1-"completed", 2-"pending", 3-"missed"
-            isCompleted = task.status?.id != 1
+            isCompleted = taskDto.status?.id != 1
             checkAndSwitchCompleted()
 
-            timeWitchCompleted = task.timeWitchCompleted
+            timeWitchCompleted = taskDto.timeWitchCompleted
 
-            inPatientName.text = Editable.Factory.getInstance().newEditable(task.patient)
-            inBloodPressure1.text = Editable.Factory.getInstance().newEditable(task.bloodPressure)
-            inHeartRate1.text = Editable.Factory.getInstance().newEditable(task.heartRate.toString())
+            inPatientName.text = Editable.Factory.getInstance().newEditable(taskDto.patient)
+            inBloodPressure1.text = Editable.Factory.getInstance().newEditable(taskDto.bloodPressure)
+            inHeartRate1.text = Editable.Factory.getInstance().newEditable(taskDto.heartRate.toString())
 
-            isBloodCollected = task.isBloodSampleCollection == true
+            isBloodCollected = taskDto.isBloodSampleCollection == true
             tvBloodSampleCollectionMarkCollected1.text =
-                if (task.isBloodSampleCollection == true) "Collected" else "Mark as Collected"
+                if (taskDto.isBloodSampleCollection == true) "Collected" else "Mark as Collected"
         }
     }
 
@@ -167,29 +167,29 @@ class EditTaskActivity : AppCompatActivity(),
     }
 
     fun onClickSaveTask(view: View) {
-        val task = Task()
+        val taskDto = TaskDto()
 
-        task.id = lastTaskId
-        task.title = checkAndReturnString(binding.inTitle.text.toString())
-        task.patient = checkAndReturnString(binding.inPatientName.text.toString())
-        task.periodicity = Periodicity(periodicityPosition+1)
-        task.bloodPressure = checkAndReturnString(binding.inBloodPressure1.text.toString())
+        taskDto.id = lastTaskId
+        taskDto.title = checkAndReturnString(binding.inTitle.text.toString())
+        taskDto.patient = checkAndReturnString(binding.inPatientName.text.toString())
+        taskDto.periodicity = PeriodicityDto(periodicityPosition+1)
+        taskDto.bloodPressure = checkAndReturnString(binding.inBloodPressure1.text.toString())
 
         if (checkAndReturnString(binding.inHeartRate1.text.toString()).isDigitsOnly()) {
-            task.heartRate = binding.inHeartRate1.text.toString().toInt()
+            taskDto.heartRate = binding.inHeartRate1.text.toString().toInt()
         }
 
         val localDateTime = LocalDateTime.of(dueOnDate, dueOnTime)
-        task.dueDateTime = localDateTime
+        taskDto.dueDateTime = localDateTime
         // Status: 1-"completed", 2-"pending", 3-"missed"
-        task.status = if (localDateTime.isAfter(LocalDateTime.now())) Status(2) else Status(3)
+        taskDto.status = if (localDateTime.isAfter(LocalDateTime.now())) StatusDto(2) else StatusDto(3)
         if (isCompleted) {
-            task.status = Status(1)
-            task.timeWitchCompleted = timeWitchCompleted
+            taskDto.status = StatusDto(1)
+            taskDto.timeWitchCompleted = timeWitchCompleted
         }
-        task.isBloodSampleCollection = isBloodCollected
-        taskRepository.update(task)
-        val idUpdated = task.id
+        taskDto.isBloodSampleCollection = isBloodCollected
+        taskRepository.update(taskDto)
+        val idUpdated = taskDto.id
 
         val returnIntent = Intent()
         returnIntent.putExtra("taskIdUpdated", idUpdated)

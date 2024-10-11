@@ -20,8 +20,8 @@ import ru.marsu.semester_work_androidapp_caresathome.adapter.TaskAdapter
 import ru.marsu.semester_work_androidapp_caresathome.adapter.TaskListener
 import ru.marsu.semester_work_androidapp_caresathome.databinding.FragmentPendingTasksBinding
 import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
-import ru.marsu.semester_work_androidapp_caresathome.entity.Status
-import ru.marsu.semester_work_androidapp_caresathome.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
+import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
 
 
 class PendingTasksFragment(private val activityContext: Context, private val pendingCountText: TextView) : Fragment(), TaskListener {
@@ -54,7 +54,7 @@ class PendingTasksFragment(private val activityContext: Context, private val pen
         binding.rvTasks.layoutManager = LinearLayoutManager(activityContext, RecyclerView.VERTICAL, false)
         binding.rvTasks.adapter = taskAdapter
         // Status: 1-"completed", 2-"pending", 3-"missed"
-        taskAdapter.add(taskRepository.getAllByStatus(Status(2)))
+        taskAdapter.add(taskRepository.getByStatus(StatusDto(2)))
         setCountPendingTasks()
 
         launcherForEdit = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -78,20 +78,20 @@ class PendingTasksFragment(private val activityContext: Context, private val pen
         taskRepository.delete(task)
     }
 
-    private fun removeInAdapterList(adapterPosition: Int): Task {
-        val task = taskAdapter.taskList.removeAt(adapterPosition)
+    private fun removeInAdapterList(adapterPosition: Int): TaskDto {
+        val task = taskAdapter.taskDtoList.removeAt(adapterPosition)
         taskAdapter.notifyItemRemoved(adapterPosition)
-        taskAdapter.notifyItemRangeChanged(adapterPosition, taskAdapter.taskList.size)
+        taskAdapter.notifyItemRangeChanged(adapterPosition, taskAdapter.taskDtoList.size)
         setCountPendingTasks()
         return task
     }
 
     private fun setCountPendingTasks() {
-        pendingCountText.text = String.format(taskAdapter.taskList.size.toString())
+        pendingCountText.text = String.format(taskAdapter.taskDtoList.size.toString())
     }
 
     override fun onClickEditTask(adapterPosition: Int) {
-        val task = taskAdapter.taskList[adapterPosition]
+        val task = taskAdapter.taskDtoList[adapterPosition]
         val intent = Intent(activityContext, EditTaskActivity::class.java)
         intent.putExtra("task", task)
         intent.putExtra("adapterPosition", adapterPosition)
