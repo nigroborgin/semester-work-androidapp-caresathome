@@ -14,7 +14,7 @@ import ru.marsu.semester_work_androidapp_caresathome.db.entity.Task
 @Database(
     entities = [Periodicity::class, Status::class, Task::class],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class LocalDb : RoomDatabase() {
 
@@ -34,7 +34,8 @@ abstract class LocalDb : RoomDatabase() {
                     val instance = Room.databaseBuilder(
                         context.applicationContext,
                         LocalDb::class.java,
-                        "MyLab.db")
+                        "MyLab.db"
+                    )
                         .createFromAsset("database/MyLab.db")
                         .allowMainThreadQueries()
                         .build()
