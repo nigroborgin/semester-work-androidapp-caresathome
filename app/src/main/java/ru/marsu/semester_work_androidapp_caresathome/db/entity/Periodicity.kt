@@ -12,7 +12,7 @@ data class Periodicity (
     @PrimaryKey(true)
     @ColumnInfo("id")
     val id : Int? = null,
-    @ColumnInfo("title")
+    @ColumnInfo("period")
     var period : String?
 
 ) : Serializable {

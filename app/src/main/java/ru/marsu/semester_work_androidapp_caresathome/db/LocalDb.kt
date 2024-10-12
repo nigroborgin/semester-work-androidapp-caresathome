@@ -1,9 +1,12 @@
 package ru.marsu.semester_work_androidapp_caresathome.db
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
+import androidx.room.RenameColumn
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.AutoMigrationSpec
 import ru.marsu.semester_work_androidapp_caresathome.db.dao.PeriodicityDao
 import ru.marsu.semester_work_androidapp_caresathome.db.dao.StatusDao
 import ru.marsu.semester_work_androidapp_caresathome.db.dao.TaskDao
@@ -13,8 +16,11 @@ import ru.marsu.semester_work_androidapp_caresathome.db.entity.Task
 
 @Database(
     entities = [Periodicity::class, Status::class, Task::class],
-    version = 1,
-    exportSchema = true
+    version = 2,
+    exportSchema = true,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2, spec = LocalDb.Migration1To2::class)
+    ]
 )
 abstract class LocalDb : RoomDatabase() {
 
@@ -45,5 +51,8 @@ abstract class LocalDb : RoomDatabase() {
             }
         }
     }
+
+    @RenameColumn(tableName = "periodicity", fromColumnName = "title", toColumnName = "period")
+    class Migration1To2 : AutoMigrationSpec
 
 }
