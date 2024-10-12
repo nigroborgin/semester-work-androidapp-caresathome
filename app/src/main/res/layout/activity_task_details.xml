@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.TaskDetailsActivity">
+
+    <TextView
+        android:id="@+id/tvTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:fontFamily="@font/quicksand"
+        android:text="Task Details"
+        android:textColor="@color/black"
+        android:textFontWeight="600"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBack"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/background_back_notext"
+        android:clickable="true"
+        android:onClick="onClickBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_alt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTaskInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        app:layout_constraintTop_toBottomOf="@+id/clBack">
+
+        <TextView
+            android:id="@+id/tvTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="22dp"
+            android:fontFamily="@font/quicksand"
+            android:text="Fill out Daily Check-Up Form."
+            android:textColor="@color/black"
+            android:textFontWeight="600"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDueDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/background_due_date_light_blue_green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle3">
+
+            <ImageView
+                android:id="@+id/icWatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_watch_blue_green"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDueDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="6dp"
+                android:fontFamily="@font/quicksand"
+                android:text="Due on 14:20 | 12 Aug 2022 "
+                android:textColor="@color/blue_green3"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/icWatch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icWatch"
+                app:layout_constraintTop_toTopOf="@+id/icWatch" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPatientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clDueDate">
+
+            <ImageView
+                android:id="@+id/icPatient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_user"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPatientName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:fontFamily="@font/quicksand"
+                android:text="Arvind Kumar Sharma"
+                android:textFontWeight="500"
+                app:layout_constraintBottom_toBottomOf="@+id/icPatient"
+                app:layout_constraintStart_toEndOf="@+id/icPatient"
+                app:layout_constraintTop_toTopOf="@+id/icPatient" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPeriodicity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:background="@drawable/background_periodicity_blue_green"
+            app:layout_constraintBottom_toBottomOf="@+id/clDueDate"
+            app:layout_constraintStart_toEndOf="@+id/clDueDate"
+            app:layout_constraintTop_toTopOf="@+id/clDueDate">
+
+            <TextView
+                android:id="@+id/tvPeriodicity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="13dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/quicksand"
+                android:text="Everyday"
+                android:textColor="@color/blue_green2"
+                android:textFontWeight="600"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTaskFormMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/clButtonsBlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clTaskInfo">
+
+        <ScrollView
+            android:id="@+id/svTaskForm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clTaskForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clBloodPressure1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvBloodPressure1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="37dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="Blood Pressure"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inBloodPressure1"
+                        android:layout_width="122dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:fontFamily="@font/quicksand"
+                        android:gravity="center"
+                        android:text="120/65"
+                        android:textColor="@color/light_gray5"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvBloodPressure1"
+                        app:layout_constraintStart_toEndOf="@+id/tvBloodPressure1"
+                        app:layout_constraintTop_toTopOf="@+id/tvBloodPressure1" />
+
+                    <TextView
+                        android:id="@+id/tvBloodPressureMeasure1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="-4dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="mm/hg"
+                        android:textColor="@color/light_gray4"
+                        android:textFontWeight="600"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/inBloodPressure1"
+                        app:layout_constraintStart_toEndOf="@+id/inBloodPressure1" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clBloodPressureAddPic1"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBloodPressure1">
+
+                        <TextView
+                            android:id="@+id/tvBloodPressureAddPic1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Add Pic of Reading"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clHeartRate1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clBloodPressure1">
+
+                    <TextView
+                        android:id="@+id/tvHeartRate1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="37dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="Heart Rate"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inHeartRate1"
+                        android:layout_width="122dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="35dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:fontFamily="@font/quicksand"
+                        android:gravity="center"
+                        android:text="65"
+                        android:textColor="@color/light_gray5"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvHeartRate1"
+                        app:layout_constraintStart_toEndOf="@+id/tvHeartRate1"
+                        app:layout_constraintTop_toTopOf="@+id/tvHeartRate1" />
+
+                    <TextView
+                        android:id="@+id/tvHeartRateMeasure1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="-4dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="bpm"
+                        android:textColor="@color/light_gray4"
+                        android:textFontWeight="600"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/inHeartRate1"
+                        app:layout_constraintStart_toEndOf="@+id/inHeartRate1" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clHeartRateAddPic1"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvHeartRate1">
+
+                        <TextView
+                            android:id="@+id/tvHeartRateAddPic1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Add Pic of Reading"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clBloodSampleCollection1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clHeartRate1">
+
+                    <TextView
+                        android:id="@+id/tvBloodSampleCollection1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="37dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="Blood Sample Collection"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clBloodSampleCollectionMarkCollected1"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="35dp"
+                        android:background="@drawable/background_task_form_elems"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBloodSampleCollection1">
+
+                        <TextView
+                            android:id="@+id/tvBloodSampleCollectionMarkCollected1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mark as Collected"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clBloodSampleCollectionAddPic1"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/background_task_form_elems"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/clBloodSampleCollectionMarkCollected1">
+
+                        <TextView
+                            android:id="@+id/tvBloodSampleCollectionAddPic1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Add Pic of Reading"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clBloodPressure2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clBloodSampleCollection1">
+
+                    <TextView
+                        android:id="@+id/tvBloodPressure2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="37dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="Blood Pressure"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inBloodPressure2"
+                        android:layout_width="122dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:fontFamily="@font/quicksand"
+                        android:gravity="center"
+                        android:text="120/65"
+                        android:textColor="@color/light_gray5"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvBloodPressure2"
+                        app:layout_constraintStart_toEndOf="@+id/tvBloodPressure2"
+                        app:layout_constraintTop_toTopOf="@+id/tvBloodPressure2" />
+
+                    <TextView
+                        android:id="@+id/tvBloodPressureMeasure2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="-4dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="mm/hg"
+                        android:textColor="@color/light_gray4"
+                        android:textFontWeight="600"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/inBloodPressure2"
+                        app:layout_constraintStart_toEndOf="@+id/inBloodPressure2" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clBloodPressureAddPic2"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBloodPressure2">
+
+                        <TextView
+                            android:id="@+id/tvBloodPressureAddPic2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Add Pic of Reading"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clHeartRate2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clBloodPressure2">
+
+                    <TextView
+                        android:id="@+id/tvHeartRate2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="37dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="Heart Rate"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inHeartRate2"
+                        android:layout_width="122dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="35dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:fontFamily="@font/quicksand"
+                        android:gravity="center"
+                        android:text="65"
+                        android:textColor="@color/light_gray5"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvHeartRate2"
+                        app:layout_constraintStart_toEndOf="@+id/tvHeartRate2"
+                        app:layout_constraintTop_toTopOf="@+id/tvHeartRate2" />
+
+                    <TextView
+                        android:id="@+id/tvHeartRateMeasure2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="-4dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="bpm"
+                        android:textColor="@color/light_gray4"
+                        android:textFontWeight="600"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/inHeartRate2"
+                        app:layout_constraintStart_toEndOf="@+id/inHeartRate2" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clHeartRateAddPic2"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/background_task_form_elems"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvHeartRate2">
+
+                        <TextView
+                            android:id="@+id/tvHeartRateAddPic2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Add Pic of Reading"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clBloodSampleCollection2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clHeartRate2">
+
+                    <TextView
+                        android:id="@+id/tvBloodSampleCollection2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="37dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/quicksand"
+                        android:text="Blood Sample Collection"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clBloodSampleCollectionMarkCollected2"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="35dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:clickable="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBloodSampleCollection2">
+
+                        <TextView
+                            android:id="@+id/tvBloodSampleCollectionMarkCollected2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mark as Collected"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clBloodSampleCollectionAddPic2"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/background_task_form_elems"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/clBloodSampleCollectionMarkCollected2">
+
+                        <TextView
+                            android:id="@+id/tvBloodSampleCollectionAddPic2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Add Pic of Reading"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clButtonsBlock"
+        android:layout_width="0dp"
+        android:layout_height="83dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSave"
+                android:layout_width="177dp"
+                android:layout_height="50dp"
+                android:background="@drawable/background_save"
+                android:onClick="onClickSaveTask"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand"
+                    android:text="Save"
+                    android:textColor="@color/blue"
+                    android:textFontWeight="600"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clMarkCompleted"
+                android:layout_width="177dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/background_mark_completed"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/clSave"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvMarkCompleted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand"
+                    android:text="Mark Completed"
+                    android:textColor="@color/blue_green3"
+                    android:textFontWeight="600"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

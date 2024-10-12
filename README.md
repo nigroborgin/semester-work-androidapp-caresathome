@@ -1,1 +1,9 @@
-# semester-work-androidapp-caresathome
+# Базы данных в мобильной разработке
+## Лабораторная работа 3
+
+- Написать автоматическую миграцию в Room
+- Написать ручную миграцию в Room
+
+Задание следует выполнять по теме курсовой.
+
+Интерфейс по возможности должен соответствовать [дизайну](https://www.figma.com/design/9sgRomqh7JohLfo8pGGhfj/Caresathome-Nurse-App-(Community)).
