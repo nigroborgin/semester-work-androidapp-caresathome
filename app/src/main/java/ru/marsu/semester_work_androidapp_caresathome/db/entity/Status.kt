@@ -12,7 +12,7 @@ data class Status (
     @PrimaryKey(true)
     @ColumnInfo("id")
     val id : Int? = null,
-    @ColumnInfo("title")
+    @ColumnInfo("status")
     var status : String?
 
 ) : Serializable {
