@@ -3,8 +3,6 @@ package ru.marsu.semester_work_androidapp_caresathome
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
-import io.realm.kotlin.UpdatePolicy
-
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith

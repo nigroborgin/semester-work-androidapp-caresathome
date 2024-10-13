@@ -1,6 +1,5 @@
 package ru.marsu.semester_work_androidapp_caresathome.db.impl_realm.dao
 
-import android.util.Log
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.ext.query
