@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.card.MaterialCardView
 import ru.marsu.semester_work_androidapp_caresathome.R
+import ru.marsu.semester_work_androidapp_caresathome.ServiceLocator
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityMainBinding
 import ru.marsu.semester_work_androidapp_caresathome.fragment.FragmentsOfMainActivity
 import ru.marsu.semester_work_androidapp_caresathome.fragment.HomeFragment
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private var selectedFrame: FragmentsOfMainActivity = FragmentsOfMainActivity.HOME
+    private val sl = ServiceLocator.instance
 
     lateinit var homeBackground: ConstraintLayout
     lateinit var inventoryBackground: ConstraintLayout
@@ -40,6 +42,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        sl.init(this)
+
 
         openFragment(HomeFragment.newInstance())
 

@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.adapter.AilmentAdapter
 import ru.marsu.semester_work_androidapp_caresathome.adapter.RemediationAdapter
 import ru.marsu.semester_work_androidapp_caresathome.databinding.FragmentHomeBinding
-import ru.marsu.semester_work_androidapp_caresathome.entity.Ailment
-import ru.marsu.semester_work_androidapp_caresathome.entity.Remediation
+import ru.marsu.semester_work_androidapp_caresathome.dto.AilmentDto
+import ru.marsu.semester_work_androidapp_caresathome.dto.RemediationDto
 
 class HomeFragment : Fragment() {
 
@@ -54,12 +53,12 @@ class HomeFragment : Fragment() {
             tNamePatient.text = "Arvind Malhotra"
             tSexPatient.text = "Male"
             tAgePatient.text = "38 Years"
-            ailmentAdapter.addAilment(Ailment(0, "Diabetes"))
-            ailmentAdapter.addAilment(Ailment(1, "Asthama"))
-            ailmentAdapter.addAilment(Ailment(2, "Tuberculosis"))
+            ailmentAdapter.addAilment(AilmentDto(0, "Diabetes"))
+            ailmentAdapter.addAilment(AilmentDto(1, "Asthama"))
+            ailmentAdapter.addAilment(AilmentDto(2, "Tuberculosis"))
             tAilmentSizeList.text = "+12"
-            remediationAdapter.addRemediation(Remediation(0, "Amino morphine", "2X", "A Day"))
-            remediationAdapter.addRemediation(Remediation(1, "Insulin Injection", "3X", "A Day"))
+            remediationAdapter.addRemediation(RemediationDto(0, "Amino morphine", "2X", "A Day"))
+            remediationAdapter.addRemediation(RemediationDto(1, "Insulin Injection", "3X", "A Day"))
             tRemediationsSizeList.text = "+45"
             tClickToNextTask.text = "Fill up Form Number 51"
         }

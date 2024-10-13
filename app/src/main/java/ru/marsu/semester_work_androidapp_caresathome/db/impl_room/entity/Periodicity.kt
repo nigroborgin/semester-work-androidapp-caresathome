@@ -1,4 +1,4 @@
-package ru.marsu.semester_work_androidapp_caresathome.db.entity
+package ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,4 +1,4 @@
-package ru.marsu.semester_work_androidapp_caresathome.db.dao
+package ru.marsu.semester_work_androidapp_caresathome.db.impl_room.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Task
 
 @Dao
 interface TaskDao {

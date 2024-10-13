@@ -39,9 +39,6 @@
             android:name=".activity.MyPatientsActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MyTasksActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
