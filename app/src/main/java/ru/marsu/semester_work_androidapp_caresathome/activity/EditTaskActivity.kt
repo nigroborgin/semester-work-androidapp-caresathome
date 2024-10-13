@@ -14,9 +14,8 @@ import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import ru.marsu.semester_work_androidapp_caresathome.R
-import ru.marsu.semester_work_androidapp_caresathome.ServiceLocation
+import ru.marsu.semester_work_androidapp_caresathome.ServiceLocator
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityEditTaskBinding
-import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
 import ru.marsu.semester_work_androidapp_caresathome.dto.PeriodicityDto
 import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
 import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
@@ -31,8 +30,7 @@ class EditTaskActivity : AppCompatActivity(),
     TimePickerDialog.OnTimeSetListener {
 
     private lateinit var binding: ActivityEditTaskBinding
-    private val sl = ServiceLocation.instance
-    private var taskRepository = sl.services["taskRepository"] as TaskRepository
+    private var taskRepository = ServiceLocator.instance.taskRepository
     private lateinit var intent: Intent
 
     private var lastTaskId: Int = -1
@@ -69,16 +67,19 @@ class EditTaskActivity : AppCompatActivity(),
                 this@EditTaskActivity,
                 taskDto.dueDateTime?.hour!!,
                 taskDto.dueDateTime?.minute!!,
-                true)
+                true
+            )
 
-            tvInputDate.text = taskDto.dueDateTime?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            tvInputDate.text =
+                taskDto.dueDateTime?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             dueOnDate = taskDto.dueDateTime!!.toLocalDate()
             datePickerDialog = DatePickerDialog(
                 this@EditTaskActivity,
                 this@EditTaskActivity,
                 taskDto.dueDateTime?.year!!,
                 taskDto.dueDateTime?.monthValue!!,
-                taskDto.dueDateTime?.dayOfMonth!!)
+                taskDto.dueDateTime?.dayOfMonth!!
+            )
 
             sPeriodicity.adapter = ArrayAdapter.createFromResource(
                 this@EditTaskActivity,
@@ -96,8 +97,14 @@ class EditTaskActivity : AppCompatActivity(),
             timeWitchCompleted = taskDto.timeWitchCompleted
 
             inPatientName.text = Editable.Factory.getInstance().newEditable(taskDto.patient)
-            inBloodPressure1.text = Editable.Factory.getInstance().newEditable(taskDto.bloodPressure)
-            inHeartRate1.text = Editable.Factory.getInstance().newEditable(taskDto.heartRate.toString())
+            inBloodPressure1.text = Editable.Factory.getInstance().newEditable(
+                taskDto.bloodPressure
+            )
+            inHeartRate1.text = Editable.Factory.getInstance().newEditable(
+                checkDigitStringAndReturnString(
+                    taskDto.heartRate.toString()
+                )
+            )
 
             isBloodCollected = taskDto.isBloodSampleCollection == true
             tvBloodSampleCollectionMarkCollected1.text =
@@ -112,13 +119,16 @@ class EditTaskActivity : AppCompatActivity(),
     override fun onNothingSelected(parent: AdapterView<*>?) {}
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        dueOnDate = LocalDate.of(year, month+1, dayOfMonth)
-        binding.tvInputDate.text = StringBuilder().append(dayOfMonth).append('.').append(month+1).append('.').append(year).toString()
+        dueOnDate = LocalDate.of(year, month + 1, dayOfMonth)
+        binding.tvInputDate.text =
+            StringBuilder().append(dayOfMonth).append('.').append(month + 1).append('.')
+                .append(year).toString()
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         dueOnTime = LocalTime.of(hourOfDay, minute)
-        binding.tvInputTime.text = StringBuilder().append(hourOfDay).append(':').append(minute).toString()
+        binding.tvInputTime.text =
+            StringBuilder().append(hourOfDay).append(':').append(minute).toString()
     }
 
     fun onClickSwitchCompleted(view: View) {
@@ -172,8 +182,8 @@ class EditTaskActivity : AppCompatActivity(),
         taskDto.id = lastTaskId
         taskDto.title = checkAndReturnString(binding.inTitle.text.toString())
         taskDto.patient = checkAndReturnString(binding.inPatientName.text.toString())
-        taskDto.periodicity = PeriodicityDto(periodicityPosition+1)
-        taskDto.bloodPressure = checkAndReturnString(binding.inBloodPressure1.text.toString())
+        taskDto.periodicity = PeriodicityDto(periodicityPosition + 1)
+        taskDto.bloodPressure = binding.inBloodPressure1.text.toString()
 
         if (checkAndReturnString(binding.inHeartRate1.text.toString()).isDigitsOnly()) {
             taskDto.heartRate = binding.inHeartRate1.text.toString().toInt()
@@ -182,7 +192,8 @@ class EditTaskActivity : AppCompatActivity(),
         val localDateTime = LocalDateTime.of(dueOnDate, dueOnTime)
         taskDto.dueDateTime = localDateTime
         // Status: 1-"completed", 2-"pending", 3-"missed"
-        taskDto.status = if (localDateTime.isAfter(LocalDateTime.now())) StatusDto(2) else StatusDto(3)
+        taskDto.status =
+            if (localDateTime.isAfter(LocalDateTime.now())) StatusDto(2) else StatusDto(3)
         if (isCompleted) {
             taskDto.status = StatusDto(1)
             taskDto.timeWitchCompleted = timeWitchCompleted
@@ -202,12 +213,30 @@ class EditTaskActivity : AppCompatActivity(),
         onBackPressedDispatcher.onBackPressed()
     }
 
-    private fun checkAndReturnString(str: String) : String {
+    private fun checkAndReturnString(str: String): String {
         if (str == "") {
             return "unknown"
         } else {
             return str
         }
+    }
+
+    private fun reverseCheckAndReturnString(str: String): String {
+        if (str == "unknown") {
+            return ""
+        } else {
+            return str
+        }
+    }
+
+    private fun checkDigitStringAndReturnString(intStr: String): String {
+        if (intStr == "null") {
+            return ""
+        }
+        if (intStr.toInt() < 1) {
+            return ""
+        }
+        return intStr
     }
 
 }

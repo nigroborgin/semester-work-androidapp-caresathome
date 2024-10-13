@@ -14,22 +14,25 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.marsu.semester_work_androidapp_caresathome.ServiceLocation
+import ru.marsu.semester_work_androidapp_caresathome.ServiceLocator
 import ru.marsu.semester_work_androidapp_caresathome.activity.EditTaskActivity
 import ru.marsu.semester_work_androidapp_caresathome.adapter.TaskAdapter
 import ru.marsu.semester_work_androidapp_caresathome.adapter.TaskListener
 import ru.marsu.semester_work_androidapp_caresathome.databinding.FragmentPendingTasksBinding
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.repository.RoomTaskRepository
 import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
 import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
 import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
 
 
-class PendingTasksFragment(private val activityContext: Context, private val pendingCountText: TextView) : Fragment(), TaskListener {
+class PendingTasksFragment(
+    private val activityContext: Context,
+    private val pendingCountText: TextView
+) : Fragment(), TaskListener {
 
     private lateinit var binding: FragmentPendingTasksBinding
     private var launcherForEdit: ActivityResultLauncher<Intent>? = null
 
-    private val sl = ServiceLocation.instance
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var taskRepository: TaskRepository
 
@@ -50,7 +53,7 @@ class PendingTasksFragment(private val activityContext: Context, private val pen
 
     private fun init() {
         taskAdapter = TaskAdapter(this, activityContext)
-        taskRepository = sl.services["taskRepository"] as TaskRepository
+        taskRepository = ServiceLocator.instance.taskRepository
         binding.rvTasks.layoutManager = LinearLayoutManager(activityContext, RecyclerView.VERTICAL, false)
         binding.rvTasks.adapter = taskAdapter
         // Status: 1-"completed", 2-"pending", 3-"missed"

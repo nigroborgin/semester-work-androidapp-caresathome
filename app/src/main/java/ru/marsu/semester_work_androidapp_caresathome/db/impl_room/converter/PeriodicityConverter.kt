@@ -1,6 +1,6 @@
-package ru.marsu.semester_work_androidapp_caresathome.db.converter
+package ru.marsu.semester_work_androidapp_caresathome.db.impl_room.converter
 
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Periodicity
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Periodicity
 import ru.marsu.semester_work_androidapp_caresathome.dto.PeriodicityDto
 
 class PeriodicityConverter private constructor() {

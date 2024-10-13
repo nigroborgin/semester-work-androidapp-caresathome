@@ -6,17 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.databinding.AilmentItemBinding
-import ru.marsu.semester_work_androidapp_caresathome.entity.Ailment
+import ru.marsu.semester_work_androidapp_caresathome.dto.AilmentDto
 
 class AilmentAdapter : RecyclerView.Adapter<AilmentAdapter.AilmentHolder>(){
 
-    val ailmentList = ArrayList<Ailment>()
+    val ailmentDtoList = ArrayList<AilmentDto>()
 
     class AilmentHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = AilmentItemBinding.bind(item)
 
-        fun bind(ailment: Ailment) /*with(binding)*/ { //позволяет не писать "binding" внутри функции для обращения к его элементам
-            binding.tTitle.text = ailment.title
+        fun bind(ailmentDto: AilmentDto) /*with(binding)*/ { //позволяет не писать "binding" внутри функции для обращения к его элементам
+            binding.tTitle.text = ailmentDto.title
         }
     }
 
@@ -26,15 +26,15 @@ class AilmentAdapter : RecyclerView.Adapter<AilmentAdapter.AilmentHolder>(){
     }
 
     override fun onBindViewHolder(holder: AilmentHolder, position: Int) {
-        holder.bind(ailmentList[position])
+        holder.bind(ailmentDtoList[position])
     }
 
     override fun getItemCount(): Int {
-        return ailmentList.size
+        return ailmentDtoList.size
     }
 
-    fun addAilment(ailment: Ailment) {
-        ailmentList.add(ailment)
+    fun addAilment(ailmentDto: AilmentDto) {
+        ailmentDtoList.add(ailmentDto)
         notifyDataSetChanged()
     }
 }

@@ -1,6 +1,6 @@
-package ru.marsu.semester_work_androidapp_caresathome.db.converter
+package ru.marsu.semester_work_androidapp_caresathome.db.impl_room.converter
 
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Task
 import ru.marsu.semester_work_androidapp_caresathome.dto.PeriodicityDto
 import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
 import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto

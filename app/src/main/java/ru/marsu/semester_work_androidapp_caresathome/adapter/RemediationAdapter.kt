@@ -6,19 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.marsu.semester_work_androidapp_caresathome.R
 import ru.marsu.semester_work_androidapp_caresathome.databinding.RemediationItemBinding
-import ru.marsu.semester_work_androidapp_caresathome.entity.Remediation
+import ru.marsu.semester_work_androidapp_caresathome.dto.RemediationDto
 
 class RemediationAdapter : RecyclerView.Adapter<RemediationAdapter.RemediationHolder>(){
 
-    val remediationList = ArrayList<Remediation>()
+    val remediationDtoList = ArrayList<RemediationDto>()
 
     class RemediationHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = RemediationItemBinding.bind(item)
 
-        fun bind(remediation: Remediation) /*with(binding)*/ { //позволяет не писать "binding" внутри функции для обращения к его элементам
-            binding.tTitle.text = remediation.title
-            binding.tFrequency.text = remediation.frequency
-            binding.tPeriodicity.text = remediation.periodicity
+        fun bind(remediationDto: RemediationDto) /*with(binding)*/ { //позволяет не писать "binding" внутри функции для обращения к его элементам
+            binding.tTitle.text = remediationDto.title
+            binding.tFrequency.text = remediationDto.frequency
+            binding.tPeriodicity.text = remediationDto.periodicity
         }
     }
 
@@ -28,15 +28,15 @@ class RemediationAdapter : RecyclerView.Adapter<RemediationAdapter.RemediationHo
     }
 
     override fun onBindViewHolder(holder: RemediationHolder, position: Int) {
-        holder.bind(remediationList[position])
+        holder.bind(remediationDtoList[position])
     }
 
     override fun getItemCount(): Int {
-        return remediationList.size
+        return remediationDtoList.size
     }
 
-    fun addRemediation(remediation: Remediation) {
-        remediationList.add(remediation)
+    fun addRemediation(remediationDto: RemediationDto) {
+        remediationDtoList.add(remediationDto)
         notifyDataSetChanged()
     }
 }

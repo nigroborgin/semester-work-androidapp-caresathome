@@ -1,4 +1,4 @@
-package ru.marsu.semester_work_androidapp_caresathome.db
+package ru.marsu.semester_work_androidapp_caresathome.db.impl_room
 
 import android.content.Context
 import androidx.room.AutoMigration
@@ -9,22 +9,22 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.AutoMigrationSpec
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ru.marsu.semester_work_androidapp_caresathome.db.dao.PeriodicityDao
-import ru.marsu.semester_work_androidapp_caresathome.db.dao.StatusDao
-import ru.marsu.semester_work_androidapp_caresathome.db.dao.TaskDao
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Periodicity
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Status
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Task
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.dao.PeriodicityDao
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.dao.StatusDao
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.dao.TaskDao
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Periodicity
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Status
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Task
 
 @Database(
     entities = [Periodicity::class, Status::class, Task::class],
     version = 3,
     exportSchema = true,
     autoMigrations = [
-        AutoMigration(from = 1, to = 2, spec = LocalDb.Migration1To2::class)
+        AutoMigration(from = 1, to = 2, spec = RoomLocalDb.Migration1To2::class)
     ]
 )
-abstract class LocalDb : RoomDatabase() {
+abstract class RoomLocalDb : RoomDatabase() {
 
     abstract fun periodicityDao(): PeriodicityDao
     abstract fun statusDao(): StatusDao
@@ -32,7 +32,7 @@ abstract class LocalDb : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: LocalDb? = null
+        private var INSTANCE: RoomLocalDb? = null
 
         private val migration = object : Migration(2, 3) {
             override fun migrate(db: SupportSQLiteDatabase) {
@@ -40,14 +40,14 @@ abstract class LocalDb : RoomDatabase() {
             }
         }
 
-        fun getDb(context: Context): LocalDb? {
+        fun getDb(context: Context): RoomLocalDb? {
             if (INSTANCE != null) {
                 return INSTANCE
             } else {
                 synchronized(this) {
                     val instance = Room.databaseBuilder(
                         context.applicationContext,
-                        LocalDb::class.java,
+                        RoomLocalDb::class.java,
                         "MyLab.db"
                     )
                         .createFromAsset("database/MyLab.db")

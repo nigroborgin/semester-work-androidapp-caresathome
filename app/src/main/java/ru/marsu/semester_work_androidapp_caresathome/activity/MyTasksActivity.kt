@@ -14,8 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import ru.marsu.semester_work_androidapp_caresathome.R
-import ru.marsu.semester_work_androidapp_caresathome.ServiceLocation
+import ru.marsu.semester_work_androidapp_caresathome.ServiceLocator
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityMyTasksBinding
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.repository.RoomTaskRepository
 import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
 import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
 import ru.marsu.semester_work_androidapp_caresathome.fragment.CompletedTasksFragment
@@ -27,7 +28,6 @@ import java.time.format.DateTimeFormatter
 class MyTasksActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyTasksBinding
-    private val sl = ServiceLocation.instance
     private lateinit var taskRepository: TaskRepository
 
     private var selectedFrame: FragmentsOfTasksActivity = FragmentsOfTasksActivity.PENDING
@@ -54,8 +54,7 @@ class MyTasksActivity : AppCompatActivity() {
         pendingCountText = binding.tvCountPendingTasks
         completedCountText = binding.tvCountCompletedTasks
 
-        sl.init(this)
-        taskRepository = sl.services["taskRepository"] as TaskRepository
+        taskRepository = ServiceLocator.instance.taskRepository
         // Status: 1-"completed", 2-"pending", 3-"missed"
         completedCountText.text = String.format(taskRepository.getByStatus(StatusDto(1)).size.toString())
         pendingCountText.text = String.format(taskRepository.getByStatus(StatusDto(2)).size.toString())
@@ -66,9 +65,9 @@ class MyTasksActivity : AppCompatActivity() {
             result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val taskIdInserted = result.data?.getIntExtra("taskIdInserted", -1)
-                    val taskById = taskIdInserted?.let { taskRepository.getOneById(it) }
+                    val taskById = taskRepository.getOneById(taskIdInserted!!)
                     // Status: 1-"completed", 2-"pending", 3-"missed"
-                    if (taskById!!.status!!.id == 1) {
+                    if (taskById.status!!.id == 1) {
                         unselectPendingTab()
                         selectCompletedTab()
                         selectedFrame = FragmentsOfTasksActivity.COMPLETED

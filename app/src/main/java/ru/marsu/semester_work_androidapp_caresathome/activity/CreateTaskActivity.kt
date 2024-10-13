@@ -13,9 +13,9 @@ import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import ru.marsu.semester_work_androidapp_caresathome.R
-import ru.marsu.semester_work_androidapp_caresathome.ServiceLocation
+import ru.marsu.semester_work_androidapp_caresathome.ServiceLocator
 import ru.marsu.semester_work_androidapp_caresathome.databinding.ActivityCreateTaskBinding
-import ru.marsu.semester_work_androidapp_caresathome.db.repository.TaskRepository
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.repository.RoomTaskRepository
 import ru.marsu.semester_work_androidapp_caresathome.dto.PeriodicityDto
 import ru.marsu.semester_work_androidapp_caresathome.dto.StatusDto
 import ru.marsu.semester_work_androidapp_caresathome.dto.TaskDto
@@ -29,8 +29,7 @@ class CreateTaskActivity : AppCompatActivity(),
     TimePickerDialog.OnTimeSetListener {
 
     private lateinit var binding: ActivityCreateTaskBinding
-    private val sl = ServiceLocation.instance
-    private var taskRepository = sl.services["taskRepository"] as TaskRepository
+    private var taskRepository = ServiceLocator.instance.taskRepository
 
     private var periodicityPosition: Int = 0
     private var timePickerDialog: TimePickerDialog? = null
@@ -118,7 +117,7 @@ class CreateTaskActivity : AppCompatActivity(),
         taskDto.title = checkAndReturnString(binding.inTitle.text.toString())
         taskDto.patient = checkAndReturnString(binding.inPatientName.text.toString())
         taskDto.periodicity = PeriodicityDto(periodicityPosition+1)
-        taskDto.bloodPressure = checkAndReturnString(binding.inBloodPressure1.text.toString())
+        taskDto.bloodPressure = binding.inBloodPressure1.text.toString()
 
         if (checkAndReturnString(binding.inHeartRate1.text.toString()).isDigitsOnly()) {
             taskDto.heartRate = binding.inHeartRate1.text.toString().toInt()
@@ -133,7 +132,7 @@ class CreateTaskActivity : AppCompatActivity(),
             taskDto.timeWitchCompleted = timeWitchCompleted
         }
         taskDto.isBloodSampleCollection = isBloodCollected
-        val idInserted = taskRepository.create(taskDto).toInt()
+        val idInserted = taskRepository.create(taskDto)
 
         val intent = Intent()
         intent.putExtra("taskIdInserted", idInserted)

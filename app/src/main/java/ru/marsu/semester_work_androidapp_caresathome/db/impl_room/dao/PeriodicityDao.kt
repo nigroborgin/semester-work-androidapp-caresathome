@@ -1,8 +1,8 @@
-package ru.marsu.semester_work_androidapp_caresathome.db.dao
+package ru.marsu.semester_work_androidapp_caresathome.db.impl_room.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Periodicity
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Periodicity
 
 @Dao
 interface PeriodicityDao {

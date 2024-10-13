@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "2.0.20"
     id("androidx.room") version "2.6.1"
     id("com.google.devtools.ksp") version "2.0.20-1.0.25"
+    id("io.realm.kotlin") version "2.3.0"
 }
 
 android {
@@ -49,9 +50,12 @@ dependencies {
     implementation(libs.androidx.cardview)
 
     // DB dependency
+    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
+    implementation("io.realm.kotlin:library-base:2.3.0")
+    // If using coroutines with the SDK
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
 
     // Default dependency
     implementation(libs.androidx.core.ktx)

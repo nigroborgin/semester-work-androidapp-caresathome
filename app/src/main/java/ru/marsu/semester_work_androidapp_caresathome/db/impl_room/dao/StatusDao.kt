@@ -1,8 +1,8 @@
-package ru.marsu.semester_work_androidapp_caresathome.db.dao
+package ru.marsu.semester_work_androidapp_caresathome.db.impl_room.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import ru.marsu.semester_work_androidapp_caresathome.db.entity.Status
+import ru.marsu.semester_work_androidapp_caresathome.db.impl_room.entity.Status
 
 @Dao
 interface StatusDao {
