@@ -1,5 +1,6 @@
 package ru.marsu.semester_work_androidapp_caresathome.db.impl_realm.dao
 
+import android.util.Log
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.ext.query
@@ -11,14 +12,12 @@ class TaskDao(
 ) {
 
     fun getOneById(id: Int): Task {
-        val task: Task = db.query<Task>("idForApp == $id")
-            .first()
-            .find()!!
+        val task: Task = db.query<Task>("idForApp = $0", id).first().find()!!
         return task
     }
 
     fun getByStatus(statusId: Int): List<Task> {
-        val taskList: List<Task> = db.query<Task>("statusId = $statusId")
+        val taskList: List<Task> = db.query<Task>("statusId = $0", statusId)
             .find()
             .stream()
             .filter { it != null }
@@ -55,7 +54,7 @@ class TaskDao(
     }
 
     fun update(task: Task): Int {
-        val foundTask: Task = db.query<Task>("idForApp == ${task.idForApp}")
+        val foundTask: Task = db.query<Task>("idForApp = $0", task.idForApp)
             .first()
             .find()!!
 
@@ -75,7 +74,7 @@ class TaskDao(
     }
 
     fun delete(task: Task): Int {
-        val foundTask = db.query<Task>("idForApp == ${task.idForApp}").first().find()
+        val foundTask = db.query<Task>("idForApp = $0", task.idForApp).first().find()
         if (foundTask != null) {
             db.writeBlocking {
                 findLatest(foundTask)?.let { delete(it) }

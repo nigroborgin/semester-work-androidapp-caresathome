@@ -9,7 +9,7 @@ class StatusDao(
 ) {
 
     fun getOneById(idForApp: Int): Status {
-        val status: Status = db.query<Status>("idForApp == $idForApp")
+        val status: Status = db.query<Status>("idForApp = $0", idForApp)
             .first()
             .find()!!
         return status

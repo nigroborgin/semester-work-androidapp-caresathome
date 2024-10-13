@@ -10,7 +10,7 @@ data class Task (
 
     @PrimaryKey(true)
     @ColumnInfo("id")
-    val id : Int? = null,
+    var id : Int? = null,
     @ColumnInfo("title")
     var title: String?,
     @ColumnInfo("due_date_time")

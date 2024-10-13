@@ -29,4 +29,7 @@ interface TaskDao {
     @Delete(Task::class)
     fun delete(task: Task) : Int
 
+    @Query("DELETE FROM task")
+    fun deleteAll()
+
 }

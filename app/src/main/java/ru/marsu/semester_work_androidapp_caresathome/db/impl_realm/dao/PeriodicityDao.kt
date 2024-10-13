@@ -9,7 +9,7 @@ class PeriodicityDao(
 ) {
 
     fun getOneById(idForApp: Int): Periodicity {
-        val periodicity: Periodicity = db.query<Periodicity>("idForApp == $idForApp")
+        val periodicity: Periodicity = db.query<Periodicity>("idForApp = $0", idForApp)
             .first()
             .find()!!
         return periodicity
